@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Calculator</title>
+  </head>
+
+  <style>
+    :root {
+      --white: #ffffff;
+      --greyLight-2: #c8d0e7;
+    }
+
+    *,
+    *::after,
+    *::before {
+      /* this makes the box not include extra size when adding "padding" */
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background-color: #333;
+      min-height: 100vh;
+    }
+
+    .numbers {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    button {
+      padding: 2rem;
+      border: lightblue solid 1.5px;
+      background-color: #111;
+      color: white;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    input {
+      width: 100%;
+      padding: 2.25rem;
+      border: lightblue solid 1.5px;
+      border-radius: 5px 5px 0 0;
+      background-color: #222;
+      color: white;
+      font-size: 1.2rem;
+      font-size: large;
+    }
+
+    input[type="text"] {
+      font-size: 2rem;
+    }
+
+    .light {
+      background-color: #233;
+    }
+
+    .foot-btns {
+      display: flex;
+    }
+
+    .foot-btns > * {
+      flex: 1;
+    }
+  </style>
+
+  <body>
+    <div>
+      <input data-ans type="text" name="ans" disabled value="" />
+      <section>
+        <div class="numbers">
+          <button data-btn value="7">7</button>
+          <button data-btn value="8">8</button>
+          <button data-btn value="9">9</button>
+          <button data-btn value="*" class="light">X</button>
+          <button data-btn value="4">4</button>
+          <button data-btn value="5">5</button>
+          <button data-btn value="6">6</button>
+          <button data-btn value="-" class="light">-</button>
+          <button data-btn value="1">1</button>
+          <button data-btn value="2">2</button>
+          <button data-btn value="3">3</button>
+          <button data-btn value="+" class="light">+</button>
+          <button data-btn value="%">%</button>
+          <button data-btn value="0">0</button>
+          <button data-btn value=".">.</button>
+          <button data-btn value="/" class="light">÷</button>
+        </div>
+      </section>
+      <footer class="foot-btns">
+        <button data-eq>=</button>
+        <button data-clr class="light">C</button>
+      </footer>
+    </div>
+
+    <script>
+      let total = document.querySelector("[data-ans]");
+
+      document.querySelectorAll("[data-btn]").forEach(function (button) {
+        document.querySelector(`[value="${button.value}"]`).onclick =
+          function () {
+            total.value += button.value;
+          };
+      });
+
+      document.querySelector("[data-clr]").onclick = function () {
+        total.value = "";
+      };
+
+      let totalBtn = document.querySelector("[data-eq]");
+      totalBtn.onclick = () => (total.value = eval(total.value));
+    </script>
+  </body>
+</html>
